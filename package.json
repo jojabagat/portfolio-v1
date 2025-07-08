@@ -1,0 +1,52 @@
+{
+  "name": "personal-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "@vueuse/head": "^2.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "scrollreveal": "^4.0.9",
+    "styled-components": "^6.1.19",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vue-styled-components": "^1.0.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
+    "@types/animejs": "^3.1.13",
+    "@types/node": "^22.14.0",
+    "@types/prop-types": "^15.7.15",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/scrollreveal": "^0.0.11",
+    "@types/styled-components": "^5.1.34",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.5.0",
+    "@vue/tsconfig": "^0.7.0",
+    "animejs": "^3.2.1",
+    "eslint": "^9.22.0",
+    "eslint-plugin-vue": "~10.0.0",
+    "jiti": "^2.4.2",
+    "npm-run-all2": "^7.0.2",
+    "prettier": "3.5.3",
+    "sass-embedded": "^1.89.2",
+    "typescript": "~5.8.0",
+    "vite": "^6.2.4",
+    "vite-imagetools": "^7.1.0",
+    "vite-plugin-image-presets": "^0.3.4",
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "vue-tsc": "^2.2.8"
+  }
+}
