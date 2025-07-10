@@ -8,8 +8,9 @@
         <button
           v-for="(job, i) in experiences"
           :key="i"
-          ref="tabRefs"
+          :ref="(el) => (tabs[i] = el as HTMLElement)"
           class="tab-button link"
+          :class="{ active: activeTabId === i }"
           :style="{ color: activeTabId === i ? 'var(--green)' : 'var(--slate)' }"
           @click="activeTabId = i"
           role="tab"
@@ -20,9 +21,8 @@
         >
           {{ job.frontmatter.company }}
         </button>
-
         <!-- Highlight -->
-        <div class="highlight" :style="highlightStyle" :activeTabId="activeTabId" />
+        <div class="highlight" />
       </div>
 
       <!-- Panels -->
@@ -46,9 +46,7 @@
                 </a>
               </span>
             </h3>
-
             <p class="range">{{ experiences[activeTabId].frontmatter.range }}</p>
-
             <div v-html="experiences[activeTabId].html"></div>
           </div>
         </Transition>
@@ -58,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, computed, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { experiences } from '@/content/jobs/jobs'
 import sr from '@/utils/sr'
 import { srConfig } from '@/config'
@@ -66,20 +64,19 @@ import { usePrefersReducedMotion } from '@/composables/UsePrefersReducedMotion'
 import { KEY_CODES, navDelay } from '@/utils/constants'
 
 const activeTabId = ref(0)
-const tabFocus = ref<number | null>(null)
-const tabs = ref<(HTMLElement | null)[]>([])
-const tabRefs = ref<HTMLElement[]>([])
+// const tabFocus = ref<number | null>(null)
+const tabs = ref<HTMLElement[]>([])
 const revealContainer = ref<HTMLElement | null>(null)
 const prefersReducedMotion = usePrefersReducedMotion()
+const MOBILE_BREAK = 600
 const isMobile = ref(false)
-
-function checkScreen() {
-  isMobile.value = window.innerWidth <= 600
+function checkResize() {
+  isMobile.value = window.innerWidth <= MOBILE_BREAK
 }
 
 onMounted(async () => {
-  checkScreen()
-  window.addEventListener('resize', checkScreen)
+  checkResize()
+  window.addEventListener('resize', checkResize)
   if (prefersReducedMotion.value) return
 
   await nextTick()
@@ -91,63 +88,79 @@ onMounted(async () => {
   }, navDelay) // Slight delay prevents scroll-jump
 })
 
-onUnmounted(() => {
-  window.removeEventListener('resize', checkScreen)
-})
-
-function focusTab() {
-  if (tabFocus.value === null) return
-
-  const currentTab = tabs.value[tabFocus.value]
-  if (currentTab) {
-    currentTab!.focus({ preventScroll: true })
-    return
-  }
-  if (tabFocus.value >= tabs.value.length) {
-    tabFocus.value = 0
-  }
-  if (tabFocus.value < 0) {
-    tabFocus.value = tabs.value.length - 1
-  }
+function focusTab(index: number) {
+  const el = tabs.value[index]
+  if (el) el.focus()
 }
-
-// Watch tabFocus changes to focus the tab
-watch(tabFocus, () => {
-  focusTab()
-})
 
 function onKeyDown(e: KeyboardEvent) {
-  switch (e.key) {
-    case KEY_CODES.ARROW_UP:
-      e.preventDefault()
-      if (tabFocus.value !== null) tabFocus.value -= 1
-      break
-    case KEY_CODES.ARROW_DOWN:
-      e.preventDefault()
-      if (tabFocus.value !== null) tabFocus.value += 1
-      break
-  }
+  if (![KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN].includes(e.key)) return
+  e.preventDefault()
+  const dir = e.key === KEY_CODES.ARROW_UP ? -1 : +1
+  const next = (activeTabId.value + dir + tabs.value.length) % tabs.value.length
+  activeTabId.value = next
+  focusTab(next)
 }
 
-const highlightStyle = computed(() => {
-  const dimension = isMobile.value ? 'var(--tab-width)' : 'var(--tab-height)'
-  return {
-    '--tab-offset': `calc(${activeTabId.value} * ${dimension})`,
-    '--active-tab-id': activeTabId.value,
-  }
-})
+// const highlightStyle = computed(() => ({
+// transform: `translateY(calc(${activeTabId.value} * var(--tab-height)))`,
+// const dimension = isMobile.value ? 'var(--tab-width)' : 'var(--tab-height)'
+// return {
+//   // '--tab-offset': `calc(${activeTabId.value} * ${dimension})`,
+//   '--active-tab-id': activeTabId.value,
+// }
+// }))
+
+onUnmounted(() => window.removeEventListener('resize', checkResize))
 </script>
 
 <style scoped>
 .experience {
   max-width: 700px;
 }
-.experience .inner {
+.inner {
   display: flex;
 }
 @media (max-width: 600px) {
   .experience .inner {
     display: block;
+  }
+  .tab-list {
+    display: flex;
+    overflow-x: auto;
+    width: calc(100% + 100px);
+    padding-left: 50px;
+    margin-left: -50px;
+    margin-bottom: 30px;
+  }
+  .tab-list .tab-button:first-of-type {
+    margin-left: 50px;
+  }
+  .tab-list .tab-button:last-of-type {
+    padding-right: 50px;
+  }
+  .tab-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-width: 120px; */
+    min-width: var(--tab-width);
+    padding: 0 15px;
+    border-left: 0;
+    border-bottom: 2px solid var(--lightest-navy);
+    text-align: center;
+  }
+  .highlight {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    max-width: var(--tab-width);
+    height: 2px;
+    margin-left: 50px;
+    transform: translateX(calc(var(--active-tab-id) * var(--tab-width)));
+  }
+  .tab-panels {
+    margin-left: 0;
   }
 }
 
@@ -155,6 +168,29 @@ const highlightStyle = computed(() => {
 @media (min-width: 700px) {
   .experience .inner {
     min-height: 340px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-list {
+    width: calc(100% + 50px);
+    padding-left: 25px;
+    margin-left: -25px;
+  }
+  .tab-list .tab-button:first-of-type {
+    margin-left: 25px;
+  }
+  .tab-list .tab-button:last-of-type {
+    padding-right: 25px;
+  }
+  .highlight {
+    margin-left: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tab-button {
+    padding: 0 15px 2px;
   }
 }
 
@@ -166,44 +202,6 @@ const highlightStyle = computed(() => {
   margin: 0;
   list-style: none;
 }
-@media (max-width: 600px) {
-  .tab-list {
-    display: flex;
-    overflow-x: auto;
-    width: calc(100% + 100px);
-    padding-left: 50px;
-    margin-left: -50px;
-    margin-bottom: 30px;
-  }
-}
-@media (max-width: 480px) {
-  .tab-list {
-    width: calc(100% + 50px);
-    padding-left: 25px;
-    margin-left: -25px;
-  }
-}
-
-@media (max-width: 600px) {
-  .tab-list > li:first-of-type {
-    margin-left: 50px;
-  }
-}
-@media (max-width: 480px) {
-  .tab-list > li:first-of-type {
-    margin-left: 25px;
-  }
-}
-@media (max-width: 600px) {
-  .tab-list > li:last-of-type {
-    padding-right: 50px;
-  }
-}
-@media (max-width: 480px) {
-  .tab-list > li:last-of-type {
-    padding-right: 25px;
-  }
-}
 
 .tab-button {
   display: flex;
@@ -213,28 +211,11 @@ const highlightStyle = computed(() => {
   padding: 0 20px 2px;
   border-left: 2px solid var(--lightest-navy);
   background-color: transparent;
-  color: var(--slate);
+  color: var(--slate); /** isActive var(--green) */
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   text-align: left;
   white-space: nowrap;
-}
-@media (max-width: 768px) {
-  .tab-button {
-    padding: 0 15px 2px;
-  }
-}
-@media (max-width: 600px) {
-  .tab-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 120px;
-    padding: 0 15px;
-    border-left: 0;
-    border-bottom: 2px solid var(--lightest-navy);
-    text-align: center;
-  }
 }
 
 .tab-button:hover,
@@ -259,32 +240,11 @@ const highlightStyle = computed(() => {
   transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: 0.1s;
 }
-@media (max-width: 600px) {
-  .highlight {
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    max-width: var(--tab-width);
-    height: 2px;
-    margin-left: 50px;
-    transform: translateX(calc(var(--active-tab-id) * var(--tab-width)));
-  }
-}
-@media (max-width: 480px) {
-  .highlight {
-    margin-left: 25px;
-  }
-}
 
 .tab-panels {
   position: relative;
   width: 100%;
   margin-left: 20px;
-}
-@media (max-width: 600px) {
-  .tab-panels {
-    margin-left: 0;
-  }
 }
 
 .tab-panel {
@@ -292,17 +252,17 @@ const highlightStyle = computed(() => {
   height: auto;
   padding: 10px 5px;
 }
-.tab-panel > h3 {
+.tab-panel h3 {
   margin-bottom: 2px;
   font-size: var(--fz-xxl);
   font-weight: 500;
   line-height: 1.3;
 }
-.tab-panel > h3.company {
+.tab-panel h3 .company {
   color: var(--green);
 }
 
-.tab-panel.range {
+.tab-panel .range {
   margin-bottom: 25px;
   color: var(--light-slate);
   font-family: var(--font-mono);

@@ -78,36 +78,9 @@ onMounted(async () => {
 }
 
 @media (max-width: 768px) {
-  .about .inner:focus {
+  .about .inner {
     display: block;
   }
-}
-
-ul.skills-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(140px, 200px));
-  grid-gap: 0 10px;
-  padding: 0;
-  margin: 20px 0 0 0;
-  overflow: hidden;
-  list-style: none;
-}
-
-ul.skills-list li {
-  position: relative;
-  margin-bottom: 10px;
-  padding-left: 20px;
-  font-family: var(--font-mono);
-  font-size: var(--fz-xs);
-}
-
-ul.skills-list li::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  color: var(--green);
-  font-size: var(--fz-sm);
-  line-height: 12px;
 }
 
 .style-pic {
@@ -122,39 +95,25 @@ ul.skills-list li::before {
   }
 }
 
-.wrapper {
+.style-pic .wrapper {
   display: block;
   position: relative;
   width: 100%;
   border-radius: var(--border-radius);
   background-color: var(--green);
 }
-.wrapper:hover,
-.wrapper:focus {
+.style-pic .wrapper:hover,
+.style-pic .wrapper:focus {
   outline: 0;
   transform: translate(-4px, -4px);
 }
-.wrapper:hover::after,
-.wrapper:focus::after {
+.style-pic .wrapper:hover::after,
+.style-pic .wrapper:focus::after {
   transform: translate(8px, 8px);
 }
 
-.wrapper:hover .img,
-.wrapper:focus .img {
-  filter: none;
-  mix-blend-mode: normal;
-}
-
-.wrapper .img {
-  position: relative;
-  border-radius: var(--border-radius);
-  mix-blend-mode: multiply;
-  filter: grayscale(100%) contrast(1);
-  transition: var(--transition);
-}
-
-.wrapper::before,
-.wrapper::after {
+.style-pic .wrapper::before,
+.style-pic .wrapper::after {
   content: '';
   display: block;
   position: absolute;
@@ -164,17 +123,31 @@ ul.skills-list li::before {
   transition: var(--transition);
 }
 
-.wrapper::before {
+.style-pic .wrapper::before {
   top: 0;
   left: 0;
   background-color: var(--navy);
   mix-blend-mode: screen;
 }
 
-.wrapper::after {
+.style-pic .wrapper::after {
   border: 2px solid var(--green);
   top: 14px;
   left: 14px;
   z-index: -1;
+}
+
+.style-pic .wrapper .img {
+  position: relative;
+  border-radius: var(--border-radius);
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) contrast(1);
+  transition: var(--transition);
+}
+
+.style-pic .wrapper:hover .img,
+.style-pic .wrapper:focus .img {
+  filter: none;
+  mix-blend-mode: normal;
 }
 </style>
