@@ -259,6 +259,12 @@ onUnmounted(() => window.removeEventListener('resize', checkResize))
   }
   .highlight {
     margin-left: 25px;
+    max-width: 300px;
+    transform: translateX(calc(var(--active-tab-id) * 300px));
+  }
+  .tab-button {
+    min-width: 300px;
+    padding: 0px;
   }
 }
 </style>

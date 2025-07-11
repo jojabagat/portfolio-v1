@@ -171,4 +171,9 @@ onMounted(async () => {
     padding: 10px 0px;
   }
 }
+@media (max-width: 498px) {
+  .skills-content {
+    gap: 10px;
+  }
+}
 </style>
