@@ -165,15 +165,19 @@ onMounted(async () => {
     width: 100px;
   }
   .skills-content li p {
-    font-size: var(--fz-xxs);
+    font-size: var(--fz-xxxs);
   }
   .skill-tab-content {
     padding: 10px 0px;
   }
-}
-@media (max-width: 498px) {
   .skills-content {
-    gap: 10px;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-content {
+    grid-template-columns: 1fr;
   }
 }
 </style>
