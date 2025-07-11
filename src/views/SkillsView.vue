@@ -75,6 +75,8 @@ onMounted(async () => {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
   color: var(--text-subtle);
   transition:
     border-color 0.3s ease,
@@ -148,5 +150,25 @@ onMounted(async () => {
   word-break: keep-all; /* ✅ prevents breaking inside words */
   overflow-wrap: break-word; /* fallback for long single words */
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  .skill-tab-content > .tab-button {
+    font-size: var(--fz-xxs);
+  }
+  .skills-content svg {
+    width: 30px;
+    height: 30px;
+  }
+  .skills-content li {
+    min-height: 100px;
+    width: 100px;
+  }
+  .skills-content li p {
+    font-size: var(--fz-xxs);
+  }
+  .skill-tab-content {
+    padding: 10px 0px;
+  }
 }
 </style>
