@@ -57,11 +57,20 @@ onMounted(() => {
   left: auto;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 300ms ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 @media (max-width: 1080px) {
   .side-element.left {
     left: 20px;
   }
-
   .side-element.right {
     right: 20px;
   }
@@ -71,15 +80,5 @@ onMounted(() => {
   .side-element {
     display: none;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 300ms ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

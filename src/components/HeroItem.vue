@@ -85,12 +85,6 @@ const items = [
   height: 100vh;
   padding: 0;
 }
-@media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
-  .hero-section {
-    height: auto;
-    padding-top: var(--nav-height);
-  }
-}
 
 .hero-section.is-hidden {
   opacity: 0;
@@ -110,11 +104,6 @@ const items = [
   font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
   font-weight: 400;
 }
-@media (max-width: 480px) {
-  .hero-section h1 {
-    margin: 0 0 20px 2px;
-  }
-}
 
 .hero-section h3 {
   margin-top: 5px;
@@ -129,5 +118,18 @@ const items = [
 
 .hero-section a.email-link {
   margin-top: 50px;
+}
+
+@media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
+  .hero-section {
+    height: auto;
+    padding-top: var(--nav-height);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    margin: 0 0 20px 2px;
+  }
 }
 </style>

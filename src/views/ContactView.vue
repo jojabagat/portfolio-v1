@@ -46,11 +46,6 @@ onMounted(async () => {
   margin: 0 auto 100px;
   text-align: center;
 }
-@media (max-width: 768px) {
-  .contact {
-    margin: 0 auto 50px;
-  }
-}
 
 .contact .overline {
   display: block;
@@ -75,5 +70,11 @@ onMounted(async () => {
 
 .email-link {
   margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    margin: 0 auto 50px;
+  }
 }
 </style>

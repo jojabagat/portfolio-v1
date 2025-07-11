@@ -77,22 +77,9 @@ onMounted(async () => {
   grid-gap: 50px;
 }
 
-@media (max-width: 768px) {
-  .about .inner {
-    display: block;
-  }
-}
-
 .style-pic {
   position: relative;
   max-width: 300px;
-}
-
-@media (max-width: 768px) {
-  .style-pic {
-    margin: 50px auto 0;
-    width: 70%;
-  }
 }
 
 .style-pic .wrapper {
@@ -149,5 +136,15 @@ onMounted(async () => {
 .style-pic .wrapper:focus .img {
   filter: none;
   mix-blend-mode: normal;
+}
+
+@media (max-width: 768px) {
+  .about .inner {
+    display: block;
+  }
+  .style-pic {
+    margin: 50px auto 0;
+    width: 70%;
+  }
 }
 </style>

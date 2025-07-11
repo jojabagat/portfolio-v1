@@ -32,7 +32,6 @@
         </Transition>
 
         <div class="nav-links">
-          <!-- <ol class="nav-links-ol" v-if="isMounted && navLinks"> -->
           <TransitionGroup
             tag="ol"
             class="nav-links-ol"
@@ -92,8 +91,6 @@ const isMounted = ref(!props.isHome)
 const scrolledToTop = ref(true)
 const scrollDirection = ref<'up' | 'down'>('down')
 const timeout = loaderDelay
-
-// Simulated preference hook
 const prefersReducedMotion = usePrefersReducedMotion()
 
 const Logo = computed(() =>
@@ -156,11 +153,6 @@ onMounted(async () => {
     if (revealContainer.value && sr) sr.reveal(revealContainer.value, srConfig())
   }, navDelay)
 
-  // const items = document.querySelectorAll('.sr-nav-item')
-  // items.forEach((el, i) => {
-  //   sr?.reveal(el as HTMLElement, srConfig(i * 100)) // staggered animation
-  // })
-
   // Cleanup
   onUnmounted(() => {
     clearTimeout(timeout)
@@ -190,31 +182,6 @@ onMounted(async () => {
   backdrop-filter: blur(10px);
   transition: var(--transition);
 }
-@media (max-width: 1080px) {
-  .nav-header {
-    padding: 0 40px;
-  }
-}
-@media (max-width: 768px) {
-  .nav-header {
-    padding: 0 25px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .nav-header.scroll-up:not(.scrolled-to-top) {
-    height: var(--nav-scroll-height);
-    transform: translateY(0px);
-    background-color: rgba(10, 25, 47, 0.85);
-    box-shadow: 0 10px 30px -10px var(--navy-shadow);
-  }
-
-  .nav-header.scroll-down:not(.scrolled-to-top) {
-    height: var(--nav-scroll-height);
-    transform: translateY(calc(var(--nav-scroll-height) * -1));
-    box-shadow: 0 10px 30px -10px var(--navy-shadow);
-  }
-}
 
 .nav-content {
   position: relative;
@@ -238,11 +205,6 @@ onMounted(async () => {
   left: 0;
   z-index: -1;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .logo a .hex-container {
-    transition: var(--transition);
-  }
-}
 
 .logo-container {
   position: relative;
@@ -252,11 +214,7 @@ onMounted(async () => {
   fill: none;
   user-select: none;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .logo-container svg {
-    transition: var(--transition);
-  }
-}
+
 .logo-container svg polygon {
   fill: var(--navy);
 }
@@ -274,11 +232,6 @@ onMounted(async () => {
 .nav-links {
   display: flex;
   align-items: center;
-}
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
 }
 
 .nav-links-ol {
@@ -309,5 +262,40 @@ onMounted(async () => {
 .resume-button {
   margin-left: 15px;
   font-size: var(--fz-xs);
+}
+
+@media (max-width: 1080px) {
+  .nav-header {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-header {
+    padding: 0 25px;
+  }
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-header.scroll-up:not(.scrolled-to-top) {
+    height: var(--nav-scroll-height);
+    transform: translateY(0px);
+    background-color: rgba(10, 25, 47, 0.85);
+    box-shadow: 0 10px 30px -10px var(--navy-shadow);
+  }
+  .nav-header.scroll-down:not(.scrolled-to-top) {
+    height: var(--nav-scroll-height);
+    transform: translateY(calc(var(--nav-scroll-height) * -1));
+    box-shadow: 0 10px 30px -10px var(--navy-shadow);
+  }
+  .logo a .hex-container {
+    transition: var(--transition);
+  }
+  .logo-container svg {
+    transition: var(--transition);
+  }
 }
 </style>

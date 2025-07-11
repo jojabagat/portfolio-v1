@@ -1,6 +1,5 @@
 <template>
   <div class="menu">
-    <!-- Add 'blur' class to body via side effect -->
     <div ref="wrapperRef">
       <!-- Hamburger Button -->
       <button
@@ -43,7 +42,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-// import { useRoute } from 'vue-router'
 import { navLinks } from '@/config'
 import { KEY_CODES } from '@/utils/constants'
 import { useHead } from '@vueuse/head'
@@ -130,32 +128,9 @@ onBeforeUnmount(() => {
 .menu {
   display: none;
 }
-@media (max-width: 768px) {
-  .menu {
-    display: block;
-  }
-}
 
 .hamburger-button {
   display: none;
-}
-@media (max-width: 768px) {
-  .hamburger-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-    margin-right: -15px;
-    padding: 15px;
-    border: 0;
-    background-color: transparent;
-    color: inherit;
-    text-transform: none;
-    transition-timing-function: linear;
-    transition-duration: 0.15s;
-    transition-property: opacity, filter;
-  }
 }
 
 .ham-box {
@@ -232,7 +207,67 @@ onBeforeUnmount(() => {
   display: none;
 }
 
+.sidebar > nav {
+  width: 100%;
+  flex-direction: column;
+  color: var(--lightest-slate);
+  font-family: var(--font-mono);
+  text-align: center;
+}
+
+.sidebar ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.sidebar ol li {
+  position: relative;
+  margin: 0 auto 20px;
+  counter-increment: item 1;
+  font-size: clamp(var(--fz-sm), 4vw, var(--fz-lg));
+}
+
+.sidebar ol li::before {
+  content: '0' counter(item) '.';
+  display: block;
+  margin-bottom: 5px;
+  color: var(--green);
+  font-size: var(--fz-sm);
+}
+
+.sidebar ol li a {
+  width: 100%;
+  padding: 3px 20px 20px;
+}
+
+.resume-link {
+  padding: 18px 50px;
+  margin: 10% auto 0;
+  width: max-content;
+}
+
 @media (max-width: 768px) {
+  .menu {
+    display: block;
+  }
+  .hamburger-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    margin-right: -15px;
+    padding: 15px;
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    text-transform: none;
+    transition-timing-function: linear;
+    transition-duration: 0.15s;
+    transition-property: opacity, filter;
+  }
   .sidebar {
     display: flex;
     justify-content: center;
@@ -258,50 +293,9 @@ onBeforeUnmount(() => {
   }
 }
 
-.sidebar > nav {
-  width: 100%;
-  flex-direction: column;
-  color: var(--lightest-slate);
-  font-family: var(--font-mono);
-  text-align: center;
-}
-
-.sidebar ol {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  width: 100%;
-}
-
-.sidebar ol li {
-  position: relative;
-  margin: 0 auto 20px;
-  counter-increment: item 1;
-  font-size: clamp(var(--fz-sm), 4vw, var(--fz-lg));
-}
-
 @media (max-width: 600px) {
   .sidebar ol li {
     margin: 0 auto 10px;
   }
-}
-
-.sidebar ol li::before {
-  content: '0' counter(item) '.';
-  display: block;
-  margin-bottom: 5px;
-  color: var(--green);
-  font-size: var(--fz-sm);
-}
-
-.sidebar ol li a {
-  width: 100%;
-  padding: 3px 20px 20px;
-}
-
-.resume-link {
-  padding: 18px 50px;
-  margin: 10% auto 0;
-  width: max-content;
 }
 </style>

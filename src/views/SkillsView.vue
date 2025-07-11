@@ -1,28 +1,31 @@
 <template>
   <section class="skills" id="skills" ref="revealContainer">
     <h2 class="numbered-heading mb-10">Technical Skills & Tools</h2>
-    <div class="skill-tabs">
-      <button
-        v-for="(skill, index) in skillList"
-        class="tab-button link"
-        :key="skill.category"
-        :class="{ active: activeTab === index }"
-        @click="activeTab = index"
-      >
-        {{ skill.category }}
-      </button>
-    </div>
 
-    <Transition name="skill-fade-slide" mode="out-in">
-      <div class="skill-tab-content" :key="activeTab">
-        <ul class="skills-content">
-          <li v-for="(item, i) in skillList[activeTab].tools" :key="i">
-            <Icon :name="item" />
-            <p>{{ item }}</p>
-          </li>
-        </ul>
+    <div class="inner">
+      <div class="skill-tabs">
+        <button
+          v-for="(skill, index) in skillList"
+          class="tab-button link"
+          :key="skill.category"
+          :class="{ active: activeTab === index }"
+          @click="activeTab = index"
+        >
+          {{ skill.category }}
+        </button>
       </div>
-    </Transition>
+
+      <Transition name="skill-fade-slide" mode="out-in">
+        <div class="skill-tab-content" :key="activeTab">
+          <ul class="skills-content">
+            <li v-for="(item, i) in skillList[activeTab].tools" :key="i">
+              <Icon :name="item" />
+              <p>{{ item }}</p>
+            </li>
+          </ul>
+        </div>
+      </Transition>
+    </div>
   </section>
 </template>
 
@@ -55,8 +58,6 @@ onMounted(async () => {
 <style scoped>
 .skills {
   max-width: 700px;
-  margin: 0 auto;
-  padding: 3rem 1rem;
 }
 
 .skill-tabs {
@@ -87,7 +88,6 @@ onMounted(async () => {
 }
 
 .skill-tab-content {
-  /* background-color: var(--light-navy); */
   padding: 20px;
   border-radius: 4px;
   animation: fadeIn 0.3s ease-in-out;

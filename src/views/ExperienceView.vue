@@ -11,7 +11,6 @@
           :ref="(el) => (tabs[i] = el as HTMLElement)"
           class="tab-button link"
           :class="{ active: activeTabId === i }"
-          :style="{ color: activeTabId === i ? 'var(--green)' : 'var(--slate)' }"
           @click="activeTabId = i"
           role="tab"
           :id="`tab-${i}`"
@@ -22,7 +21,12 @@
           {{ job.frontmatter.company }}
         </button>
         <!-- Highlight -->
-        <div class="highlight" />
+        <div
+          class="highlight"
+          :style="{
+            '--active-tab-id': activeTabId,
+          }"
+        />
       </div>
 
       <!-- Panels -->
@@ -64,7 +68,6 @@ import { usePrefersReducedMotion } from '@/composables/UsePrefersReducedMotion'
 import { KEY_CODES, navDelay } from '@/utils/constants'
 
 const activeTabId = ref(0)
-// const tabFocus = ref<number | null>(null)
 const tabs = ref<HTMLElement[]>([])
 const revealContainer = ref<HTMLElement | null>(null)
 const prefersReducedMotion = usePrefersReducedMotion()
@@ -102,15 +105,6 @@ function onKeyDown(e: KeyboardEvent) {
   focusTab(next)
 }
 
-// const highlightStyle = computed(() => ({
-// transform: `translateY(calc(${activeTabId.value} * var(--tab-height)))`,
-// const dimension = isMobile.value ? 'var(--tab-width)' : 'var(--tab-height)'
-// return {
-//   // '--tab-offset': `calc(${activeTabId.value} * ${dimension})`,
-//   '--active-tab-id': activeTabId.value,
-// }
-// }))
-
 onUnmounted(() => window.removeEventListener('resize', checkResize))
 </script>
 
@@ -121,85 +115,13 @@ onUnmounted(() => window.removeEventListener('resize', checkResize))
 .inner {
   display: flex;
 }
-@media (max-width: 600px) {
-  .experience .inner {
-    display: block;
-  }
-  .tab-list {
-    display: flex;
-    overflow-x: auto;
-    width: calc(100% + 100px);
-    padding-left: 50px;
-    margin-left: -50px;
-    margin-bottom: 30px;
-  }
-  .tab-list .tab-button:first-of-type {
-    margin-left: 50px;
-  }
-  .tab-list .tab-button:last-of-type {
-    padding-right: 50px;
-  }
-  .tab-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* min-width: 120px; */
-    min-width: var(--tab-width);
-    padding: 0 15px;
-    border-left: 0;
-    border-bottom: 2px solid var(--lightest-navy);
-    text-align: center;
-  }
-  .highlight {
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    max-width: var(--tab-width);
-    height: 2px;
-    margin-left: 50px;
-    transform: translateX(calc(var(--active-tab-id) * var(--tab-width)));
-  }
-  .tab-panels {
-    margin-left: 0;
-  }
-}
-
-/* Prevent container from jumping */
-@media (min-width: 700px) {
-  .experience .inner {
-    min-height: 340px;
-  }
-}
-
-@media (max-width: 480px) {
-  .tab-list {
-    width: calc(100% + 50px);
-    padding-left: 25px;
-    margin-left: -25px;
-  }
-  .tab-list .tab-button:first-of-type {
-    margin-left: 25px;
-  }
-  .tab-list .tab-button:last-of-type {
-    padding-right: 25px;
-  }
-  .highlight {
-    margin-left: 25px;
-  }
-}
-
-@media (max-width: 768px) {
-  .tab-button {
-    padding: 0 15px 2px;
-  }
-}
 
 .tab-list {
   position: relative;
   z-index: 3;
   width: max-content;
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
   list-style: none;
 }
 
@@ -211,7 +133,7 @@ onUnmounted(() => window.removeEventListener('resize', checkResize))
   padding: 0 20px 2px;
   border-left: 2px solid var(--lightest-navy);
   background-color: transparent;
-  color: var(--slate); /** isActive var(--green) */
+  color: var(--slate);
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   text-align: left;
@@ -267,5 +189,76 @@ onUnmounted(() => window.removeEventListener('resize', checkResize))
   color: var(--light-slate);
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
+}
+
+@media (max-width: 768px) {
+  .tab-button {
+    padding: 0 15px 2px;
+  }
+}
+
+@media (min-width: 700px) {
+  .experience .inner {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 600px) {
+  .experience .inner {
+    display: block;
+  }
+  .tab-list {
+    display: flex;
+    overflow-x: auto;
+    width: calc(100% + 100px);
+    padding-left: 50px;
+    margin-left: -50px;
+    margin-bottom: 30px;
+  }
+  .tab-list li:first-of-type {
+    margin-left: 50px;
+  }
+  .tab-list li:last-of-type {
+    padding-right: 50px;
+  }
+  .tab-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 345px;
+    padding: 0 15px;
+    border-left: 0px;
+    border-bottom: 2px solid var(--lightest-navy);
+    text-align: center;
+  }
+  .highlight {
+    top: auto;
+    bottom: 0px;
+    width: 100%;
+    max-width: 345px;
+    height: 2px;
+    margin-left: 50px;
+    transform: translateX(calc(var(--active-tab-id) * 345px));
+  }
+  .tab-panels {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-list {
+    width: calc(100% + 50px);
+    padding-left: 25px;
+    margin-left: -25px;
+  }
+  .tab-list li:first-of-type {
+    margin-left: 25px;
+  }
+  .tab-list li:last-of-type {
+    padding-right: 25px;
+  }
+  .highlight {
+    margin-left: 25px;
+  }
 }
 </style>
