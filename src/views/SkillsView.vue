@@ -165,7 +165,7 @@ onMounted(async () => {
     width: 100px;
   }
   .skills-content li p {
-    font-size: var(--fz-xxxs);
+    font-size: var(--fz-xxs);
   }
   .skill-tab-content {
     padding: 10px 0px;
@@ -176,8 +176,11 @@ onMounted(async () => {
 }
 
 @media (max-width: 480px) {
-  .skills-content {
-    grid-template-columns: 1fr;
+  .skills-content li {
+    width: 90px;
+  }
+  .skills-content li p {
+    font-size: var(--fz-xxxs);
   }
 }
 </style>
