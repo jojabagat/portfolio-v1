@@ -45,7 +45,12 @@
               <span>{{ experiences[activeTabId].frontmatter.title }}</span>
               <span class="company">
                 &nbsp;@&nbsp;
-                <a :href="experiences[activeTabId].frontmatter.url" class="inline-link">
+                <a
+                  :href="experiences[activeTabId].frontmatter.url"
+                  class="inline-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {{ experiences[activeTabId].frontmatter.company }}
                 </a>
               </span>
