@@ -16,7 +16,7 @@ export const experiences: Experience[] = [
       range: '2021 – 2025',
       url: 'https://example.com',
     },
-    html: '<ul class="fancyList"><li>Developed enterprise solutions with Vue.js and TypeScript, enhancing responsiveness and scalability.</li><li>Estimated development efforts and delivered technical enhancements aligned with Agile sprint goals.</li><li>Conducted code reviews, maintained secure version control practices, and contributed to documentation.</li><li>Proactively studied Vue.js to meet evolving client tech stacks.</li></ul>',
+    html: '<ul class="fancyList"><li>Estimated effort requirements for design, source code, and testing.</li><li>Modified existing source codes according to client\'s requirements.</li><li>Handled non-routine tasks for existing software, including code reviews, feature research, and implementing improvements.</li><li>Updates and maintains software according to specifications and documentation.</li><li>Engaged in independent study on vue.js and TypeScript inpreparation for an upcoming project with hands-on output.</li></ul>',
   },
   {
     frontmatter: {
@@ -25,7 +25,7 @@ export const experiences: Experience[] = [
       range: '2019 – 2021',
       url: 'https://devhouse.io',
     },
-    html: '<ul class="fancyList"><li>Completed full-stack development tasks, from requirements to deployment, using Java, TypeScript, PostgreSQL, and internal tools.</li><li>Performed code and design reviews, ensuring clean architecture and unit test coverage.</li><li>Participated in both Agile and Waterfall projects; collaborated with Japanese clients for on-site requirements gathering.</li><li>Engaged in self-learning of tools to meet with client demands.</li></ul>',
+    html: '<ul class="fancyList"><li>Hands-on experience across all phases of software development.</li><li>Estimated effort requirements for design, source code, and testing.</li><li>Created and developed detailed designs based on requirements analysis.</li><li>Created and performed unit and integration tests.</li><li>Performed peer-review for design documents, source codes, and test specifications.</li><li>Utilized various development and testing tools such as VSCode, Eclipse, Ranorex, JUnit.</li><li>Experienced working in both Agile and Waterfall methodologies.</li><li>Spent time in Japan working closely with the client to clarify questions and make sure we were aligned on the project’s goals and requirements.</li></ul>',
   },
   {
     frontmatter: {
@@ -34,6 +34,6 @@ export const experiences: Experience[] = [
       range: '2018',
       url: 'https://devhouse.io',
     },
-    html: '<ul class="fancyList"><li>Built responsive websites using HubSpot CMS, integrated APIs, and conducted pre-launch QA.</li><li>Created high-fidelity design proposals using Adobe Photoshop</li></ul>',
+    html: '<ul class="fancyList"><li>Developed and maintained websites for clients according to their needs and desired design using HubSpot CMS.</li><li>Created PSD files for website design proposals.</li></ul>',
   },
 ]

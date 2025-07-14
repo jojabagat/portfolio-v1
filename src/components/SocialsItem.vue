@@ -2,7 +2,7 @@
   <SideItem :isHome="isHome" orientation="left">
     <ul class="social-list">
       <li v-for="(item, i) in socialMedia" :key="i">
-        <a :href="item.url" :aria-label="item.name" target="_blank" rel="noreferrer">
+        <a :href="item.url" :aria-label="item.name" target="_blank" rel="noopener noreferrer">
           <Icon :name="item.name" />
         </a>
       </li>

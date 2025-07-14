@@ -19,6 +19,7 @@ type IconName =
   | 'GitHubSocial'
   | 'GitHub'
   | 'GitLab'
+  | 'GraphQL'
   | 'HTML'
   | 'HubSpot CMS'
   | 'Java'
@@ -50,6 +51,7 @@ type IconName =
   | 'Vue.js'
   | 'Waterfall Methodology'
   | 'Windows'
+  | 'YAML'
   | 'jQuery'
 
 const props = defineProps<{
@@ -82,6 +84,8 @@ const component = computed(() => {
       return defineAsyncComponent(() => import('./GithubIcon1.vue'))
     case 'GitLab':
       return defineAsyncComponent(() => import('./GitlabIcon.vue'))
+    case 'GraphQL':
+      return defineAsyncComponent(() => import('./GraphqlIcon.vue'))
     case 'HTML':
       return defineAsyncComponent(() => import('./HTMLIcon.vue'))
     case 'HubSpot CMS':
@@ -144,6 +148,8 @@ const component = computed(() => {
       return defineAsyncComponent(() => import('./WaterfallIcon.vue'))
     case 'Windows':
       return defineAsyncComponent(() => import('./WindowsIcon.vue'))
+    case 'YAML':
+      return defineAsyncComponent(() => import('./YamlIcon.vue'))
     case 'jQuery':
       return defineAsyncComponent(() => import('./JqueryIcon.vue'))
     default:

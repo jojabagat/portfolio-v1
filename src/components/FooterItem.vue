@@ -4,7 +4,7 @@
     <div class="social-links">
       <ul>
         <li v-for="({ name, url }, i) in socialMedia" :key="i">
-          <a :href="url" :aria-label="name">
+          <a :href="url" :aria-label="name" target="_blank" rel="noopener noreferrer">
             <Icon :name="name" />
           </a>
         </li>
