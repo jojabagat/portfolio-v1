@@ -18,6 +18,10 @@ export const socialMedia: Links[] = [
     name: 'LeetCode',
     url: 'https://leetcode.com/u/jojabagat/',
   },
+  {
+    name: 'CodePen',
+    url: 'https://codepen.io/jojabagat',
+  },
 ]
 
 export const navLinks: Links[] = [

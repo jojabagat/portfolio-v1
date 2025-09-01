@@ -10,6 +10,7 @@ type IconName =
   | 'Agile Scrum'
   | 'Bookmark'
   | 'C++'
+  | 'CodePen'
   | 'CSS'
   | 'Eclipse IDE'
   | 'External'
@@ -47,6 +48,7 @@ type IconName =
   | 'Technical Documentation'
   | 'TypeScript'
   | 'Unit and Integration Testing'
+  | 'Vite'
   | 'VSCode'
   | 'Vue.js'
   | 'Waterfall Methodology'
@@ -68,6 +70,8 @@ const component = computed(() => {
       return defineAsyncComponent(() => import('./BookmarkIcon.vue'))
     case 'C++':
       return defineAsyncComponent(() => import('./CppIcon.vue'))
+    case 'CodePen':
+      return defineAsyncComponent(() => import('./CodepenIcon.vue'))
     case 'CSS':
       return defineAsyncComponent(() => import('./CSSIcon.vue'))
     case 'Eclipse IDE':
@@ -140,6 +144,8 @@ const component = computed(() => {
       return defineAsyncComponent(() => import('./TypescriptIcon.vue'))
     case 'Unit and Integration Testing':
       return defineAsyncComponent(() => import('./TestingIcon.vue'))
+    case 'Vite':
+      return defineAsyncComponent(() => import('./ViteIcon.vue'))
     case 'VSCode':
       return defineAsyncComponent(() => import('./VscodeIcon.vue'))
     case 'Vue.js':

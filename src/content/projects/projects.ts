@@ -2,6 +2,7 @@ import type { ProjectItem } from './types'
 import buckeye from '@/images/works/buckeye.png'
 import agtivation from '@/images/works/agtivation.png'
 import dinapolis from '@/images/works/dinapolis.png'
+import portfolio from '@/images/works/portfolio.png'
 
 export const projects: ProjectItem[] = [
   {
@@ -42,5 +43,18 @@ export const projects: ProjectItem[] = [
       external: 'https://dinapolisfirehouse.com/',
     },
     html: '<p>Maintained and enhanced the existing website by implementing client-requested feature additions and modifications.</p>',
+  },
+  {
+    frontmatter: {
+      title: 'Personal Portfolio',
+      cover: {
+        childImageSharp: {
+          gatsbyImageData: portfolio,
+        },
+      },
+      tech: ['Vue.js', 'TypeScript'],
+      external: 'https://jojabagat.vercel.app/',
+    },
+    html: '<p>Developed my own personal website based on the <a href="https://v4.brittanychiang.com/" target="_blank">React.js project of Brittany Chiang</a> by converting it to a Vue.js + TypeScript project.</p>',
   },
 ]

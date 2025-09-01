@@ -27,7 +27,7 @@ export const skillList: SkillItem[] = [
   },
   {
     category: 'Tools & IDEs',
-    tools: ['Eclipse IDE', 'VSCode', 'Postman', 'NPM'],
+    tools: ['Eclipse IDE', 'VSCode', 'Postman', 'NPM', 'Vite'],
   },
   {
     category: 'Testing & APIs',
